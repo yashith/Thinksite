@@ -1,0 +1,24 @@
+.line{
+    /* background-color: #FFC614; */
+    width: 100%;
+    height: 5px;
+}
+.linew{
+    border:none;
+    border-top:1px dashed #FFC614;
+    color:#fff;
+    background-color:transparent;
+    height:1px;
+    width:100%;
+}
+.circle{
+    position: relative;
+    top: -19px;
+    left: 10px;
+    width: 30px;
+    height: 30px;
+    background-color: aliceblue;
+    border-radius: 50%;
+    border: 8px solid green;
+    z-index: 1;
+}
