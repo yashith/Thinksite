@@ -4,11 +4,12 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Twlogo from './Twlogo.png';
 import PP from './PP.jpg'
 import Speakers from './Components/Speakers'
+import Partners from './Components/Partners'
 import Timeline from './Components/Timeline'
 function App() {
   return (
     <div className="App">
-      <Container fluid>
+      <Container fluid className='bg'>
         <Row className='sec1'>
           <Col md-12 className='vercenter'>
             <Row className='alcenter'>
@@ -40,7 +41,7 @@ function App() {
           <Col>
             <Row className='mb-5'>
               <Col>
-                <h1>Time Line</h1>
+                <h1>Guest Speakers</h1>
               </Col>
             </Row>
             <Speakers/>
@@ -50,10 +51,20 @@ function App() {
           <Col>
             <Row>
               <Col className='mb-5'>
-              <h1>Guest Speakers</h1>
+              <h1>Timeline</h1>
               </Col>
             </Row>
             <Timeline/>
+          </Col>
+        </Row>
+        <Row className='sec4'>
+          <Col>
+            <Row>
+              <Col className='mb-5'>
+              <h1>Our Partners</h1>
+              </Col>
+            </Row>
+            <Partners/>
           </Col>
         </Row>
       </Container>
