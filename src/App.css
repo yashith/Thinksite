@@ -91,10 +91,26 @@
 }
 
 .bg{
-  background: rgb(77,77,77);
-  background: linear-gradient(180deg, rgb(39, 45, 68) 0%, rgba(0,0,0,1) 100%);
+  position: absolute;
+  background: rgb(0,0,0);
+  background: linear-gradient(180deg, rgba(0,0,0,1) 9%, rgba(49,62,111,1) 45%, rgba(0,0,0,1) 79%);
 }
-@keyframes slidein{
-  0%   {left:-200px; }
- 100%   {left:0px; }
+.con{
+  position: absolute;
+  background-color: transparent;
 }
+.dot{ 
+  position: absolute;
+  height: 400%;
+  width: 100%;
+
+}
+.tria{
+  background-image: url('./triawhite.png');
+  background-repeat:repeat-y;
+  background-size: auto;
+  width:30%;
+  height:400%;
+
+}
+

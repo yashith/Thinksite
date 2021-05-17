@@ -1,3 +1,5 @@
+import {React,useState,useEffect} from 'react';
+
 import './App.css';
 import { Container, Row, Col, Card, CardDeck } from 'react-bootstrap';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -6,10 +8,33 @@ import PP from './PP.jpg'
 import Speakers from './Components/Speakers'
 import Partners from './Components/Partners'
 import Timeline from './Components/Timeline'
+import dots from './dots.png'
+
 function App() {
+  const [y, sety] = useState()
+  const testparralex=()=>{sety(window.pageYOffset)
+  console.log(y)}
+  useEffect(() => {
+    window.addEventListener('scroll',testparralex)
+    return () => {
+      window.removeEventListener('scroll',testparralex)
+    }
+  }, [])
+  
+  window.addEventListener('scroll',testparralex)
   return (
-    <div className="App">
-      <Container fluid className='bg'>
+    <div className="App" >
+      <div className='dot bg'>
+      </div>
+      <div style={
+        {
+          position:'absolute',
+          transform: `translateY(${y * 0.5}px)`
+        }
+      }
+      className='tria'></div>
+      {/* <div className="bg"></div> */}
+      <Container fluid className='con' >
         <Row className='sec1'>
           <Col md-12 className='vercenter'>
             <Row className='alcenter'>
@@ -32,7 +57,6 @@ function App() {
                   <h1>ON</h1>
                   <h1>28 Nov - 15 Oct.</h1>
                 </div>
-
               </Col>
             </Row>
           </Col>
