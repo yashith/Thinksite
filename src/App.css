@@ -93,7 +93,7 @@
 .bg{
   position: absolute;
   background: rgb(0,0,0);
-  background: linear-gradient(180deg, rgba(0,0,0,1) 9%, rgba(49,62,111,1) 45%, rgba(0,0,0,1) 79%);
+  background: linear-gradient(180deg, rgba(0,0,0,1) 9%, rgb(12, 18, 37) 45%, rgba(0,0,0,1) 79%);
 }
 .con{
   position: absolute;
@@ -105,12 +105,35 @@
   width: 100%;
 
 }
-.tria{
-  background-image: url('./triawhite.png');
-  background-repeat:repeat-y;
-  background-size: auto;
-  width:30%;
-  height:400%;
+.tria4{
+  background-image: url('./triang2.png');
+  background-repeat:repeat;
+  
+  /* background-size: 100%; */
+  /* border-top-left-radius: 70%;
+  border-bottom-right-radius:100%; */
+  /* top: 100%;
+  left: -10%; */
+  border-bottom-left-radius: 30%;
+  
+  width:100%;
+  height:100%;
+
+}
+.tria5{
+  background-image: url('./triang2.png');
+  background-repeat:repeat;
+  
+  /* background-size: 100%; */
+  /* border-top-left-radius: 70%;
+  border-bottom-right-radius:100%; */
+  /* top: 100%;
+  left: -10%; */
+  transform: translateX(180deg);
+  border-bottom-left-radius: 30%;
+  width:100%;
+  height:100%;
+  top:100%
 
 }
 

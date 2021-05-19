@@ -1,4 +1,4 @@
-import {React,useState,useEffect} from 'react';
+import { React, useState, useEffect } from 'react';
 
 import './App.css';
 import { Container, Row, Col, Card, CardDeck } from 'react-bootstrap';
@@ -9,31 +9,57 @@ import Speakers from './Components/Speakers'
 import Partners from './Components/Partners'
 import Timeline from './Components/Timeline'
 import dots from './dots.png'
+import tpattern from './tpattern.png'
+import { Parallax, Background } from 'react-parallax';
 
 function App() {
   const [y, sety] = useState()
-  const testparralex=()=>{sety(window.pageYOffset)
-  console.log(y)}
+  const testparralex = () => {
+    sety(window.pageYOffset)
+    console.log(y)
+  }
   useEffect(() => {
-    window.addEventListener('scroll',testparralex)
+    window.addEventListener('scroll', testparralex)
     return () => {
-      window.removeEventListener('scroll',testparralex)
+      window.removeEventListener('scroll', testparralex)
     }
   }, [])
-  
-  window.addEventListener('scroll',testparralex)
+
+  window.addEventListener('scroll', testparralex)
   return (
     <div className="App" >
-      <div className='dot bg'>
-      </div>
       <div style={
         {
           position:'absolute',
           transform: `translateY(${y * 0.5}px)`
         }
-      }
-      className='tria'></div>
+      }>
+
+      </div>
       {/* <div className="bg"></div> */}
+      <div className='bg dot'></div>
+      {/* <div style={{
+        position: 'absolute',
+
+      }} className='tria'></div>
+      <div style={{
+        position: 'absolute',
+
+      }} className='tria2'></div>
+      <div style={{
+        position: 'absolute',
+
+      }} className='tria3'></div> */}
+      <div style={{
+        position: 'absolute',
+        transform: `translateY(${y * 0.1}px)`
+
+      }} className='tria4'></div>
+      <div style={{
+        position: 'absolute',
+        transform: `translateY(${y * 0.1}px)`
+
+      }} className='tria5'></div>
       <Container fluid className='con' >
         <Row className='sec1'>
           <Col md-12 className='vercenter'>
@@ -68,27 +94,27 @@ function App() {
                 <h1>Guest Speakers</h1>
               </Col>
             </Row>
-            <Speakers/>
+            <Speakers />
           </Col>
         </Row>
         <Row className='sec3'>
           <Col>
             <Row>
               <Col className='mb-5'>
-              <h1>Timeline</h1>
+                <h1>Timeline</h1>
               </Col>
             </Row>
-            <Timeline/>
+            <Timeline />
           </Col>
         </Row>
         <Row className='sec4'>
           <Col>
             <Row>
               <Col className='mb-5'>
-              <h1>Our Partners</h1>
+                <h1>Our Partners</h1>
               </Col>
             </Row>
-            <Partners/>
+            <Partners />
           </Col>
         </Row>
       </Container>
