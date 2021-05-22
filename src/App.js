@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react';
 
 import './App.css';
-import { Container, Row, Col, Card, CardDeck } from 'react-bootstrap';
+import { Container, Row, Col, Card, CardDeck,Button } from 'react-bootstrap';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Twlogo from './Twlogo.png';
 import PP from './PP.jpg'
@@ -85,13 +85,18 @@ function App() {
                 </div>
               </Col>
             </Row>
+            <Row className='sec1-1'>
+              <Col md-12 className="pt-5">
+                <Button variant='warning'><span className='rel w700' style={{fontSize:'3vh',padding:'10px'}}>Register</span></Button>
+              </Col>
+            </Row>
           </Col>
         </Row>
-        <Row className='sec2'>
+        <Row className='sec2 mt-5'>
           <Col>
             <Row className='mb-5'>
               <Col>
-                <h1>Guest Speakers</h1>
+                <h1><span style={{fontSize:'6vh'}}>Guest Speakers</span></h1>
               </Col>
             </Row>
             <Speakers />
@@ -101,7 +106,7 @@ function App() {
           <Col>
             <Row>
               <Col className='mb-5'>
-                <h1>Timeline</h1>
+                <h1><span style={{fontSize:'6vh'}}>Timeline</span></h1>
               </Col>
             </Row>
             <Timeline />
