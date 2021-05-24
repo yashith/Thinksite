@@ -3,6 +3,7 @@
 # dependencies
 Thinksite/node_modules
 Backend/node_modules
+**/node_modules
 /.pnp
 .pnp.js
 
