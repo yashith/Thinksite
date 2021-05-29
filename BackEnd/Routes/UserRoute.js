@@ -43,20 +43,33 @@ userRoute.route('/')
 //                 }
 //             })
 //     })
-userRoute.route('/signup',(req,res,next)=>{
-    Users.register(new Users({username:req.body.username}),
-    req.body.password,(erruser)=>{
-        if(err){
-            res.statusCode=500;
-            res.setHeader=('Content-type','application/json');
-            res.json({success:true,status:'Registration Successful'});
-        }
-    })
-})
-userRoute.route('/login',passport.authenticate('local'),(req,res)=>{
-    res.statusCode=200;
-    res.setHeader('Content-Type','application/json');
-    res.json({success:true,status:'you are succesfully loggedin'})
+userRoute.post('/signup', (req, res, next) => {
+    Users.register(new Users(
+        {username: req.body.username,
+        name: req.body.name,
+        category: req.body.category,
+        institute: req.body.institute,
+        email: req.body.email
+        }), 
+      req.body.password, (err, user) => {
+      if(err) {
+        res.statusCode = 500;
+        res.setHeader('Content-Type', 'application/json');
+        res.json({err: err});
+      }
+      else {
+        passport.authenticate('local')(req, res, () => {
+          res.statusCode = 200;
+          res.setHeader('Content-Type', 'application/json');
+          res.json({success: true, status: 'Registration Successful!'});
+        });
+      }
+    });
+  });
+userRoute.post('/login', passport.authenticate('local'), (req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json({ success: true, status: 'you are succesfully loggedin' })
 })
 
 

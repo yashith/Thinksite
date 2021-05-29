@@ -25,10 +25,10 @@ function auth (req, res, next) {
           next();
     }
 }
-app.use(auth)
 app.get('/',(req,res)=>{
     res.send('test')
 })
 app.use('/user',users);
+app.use(auth)
 
 app.listen(3001)
