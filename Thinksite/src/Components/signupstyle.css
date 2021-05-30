@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;700;800&display=swap');
+.rel{
+  font-family: 'Raleway', sans-serif; 
+}
+.maindiv{
+    background-color: black;
+    height: 100vh;
+    margin: 0px;
+}
+.headercenter{
+  text-align: center;
+}
+.fullrow{
+  height: 100vh;
+}
+.alignl-left{
+    text-align: right !important
+}

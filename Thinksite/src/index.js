@@ -4,11 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ParallaxProvider } from 'react-scroll-parallax';
-
+import Signup from './Components/signup'
 ReactDOM.render(
   <React.StrictMode>
     <ParallaxProvider>
-      <App />
+      {/* <App /> */}
+      <Signup/>
     </ParallaxProvider>
 
   </React.StrictMode>,

@@ -11,6 +11,7 @@ import Timeline from './Components/Timeline'
 import dots from './dots.png'
 import tpattern from './tpattern.png'
 import { Parallax, Background } from 'react-parallax';
+import Signup from './Components/signup.js'
 
 function App() {
   const [y, sety] = useState()
@@ -36,20 +37,8 @@ function App() {
       }>
 
       </div>
-      {/* <div className="bg"></div> */}
+
       <div className='bg dot'></div>
-      {/* <div style={{
-        position: 'absolute',
-
-      }} className='tria'></div>
-      <div style={{
-        position: 'absolute',
-
-      }} className='tria2'></div>
-      <div style={{
-        position: 'absolute',
-
-      }} className='tria3'></div> */}
       <div style={{
         position: 'absolute',
         transform: `translateY(${y * 0.1}px)`
@@ -123,6 +112,7 @@ function App() {
           </Col>
         </Row>
       </Container>
+      
     </div>
   );
 }
