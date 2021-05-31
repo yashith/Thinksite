@@ -4,16 +4,24 @@
   font-family: 'Raleway', sans-serif; 
 }
 .maindiv{
-    background-color: black;
-    height: 100vh;
-    margin: 0px;
+  height: 100vh;
+  background-color: black;
+  margin-left: 0px;
+  margin-right: 0px;
+  min-width: 100%;
+  max-width: 100%;
+    
 }
 .headercenter{
   text-align: center;
 }
 .fullrow{
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 }
-.alignl-left{
-    text-align: right !important
+.btnsub{
+  display: flex;
+  justify-content: center;
+  align-content: center
+
 }
