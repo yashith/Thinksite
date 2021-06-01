@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const cors = require('cors');
 let authenticate=require('./authenticate')
 require('dotenv/config')
 const users=require('./Routes/UserRoute')
@@ -10,8 +11,7 @@ app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
-
-
+app.use(cors());
 mongoose.connect(process.env.DB_Connection,{useNewUrlParser: true, useUnifiedTopology: true},(err)=>{if(err){console.log(err)}else{console.log("connected")}})
 function auth (req, res, next) {
     console.log(req.user);
@@ -29,6 +29,6 @@ app.get('/',(req,res)=>{
     res.send('test')
 })
 app.use('/user',users);
-app.use(auth)
+// app.use(auth)
 
 app.listen(3001)

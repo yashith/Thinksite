@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Col, Row, Card, Form, Button } from 'react-bootstrap'
 import './signupstyle.css'
+import {signuppost} from '../Services/Signup_service'
 import { useFormik } from 'formik'
 
 const validate = values => {
@@ -41,7 +42,7 @@ function Signup() {
         },
         validate,
         onSubmit: values => {
-            console.log(JSON.stringify(values))
+            signuppost(values)
         }
     })
     return (
