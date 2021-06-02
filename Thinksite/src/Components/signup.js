@@ -1,7 +1,7 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { Container, Col, Row, Card, Form, Button } from 'react-bootstrap'
 import './signupstyle.css'
-import {signuppost} from '../Services/Signup_service'
+import {signuppost,checkemail,checkuser} from '../Services/Signup_service'
 import { useFormik } from 'formik'
 
 const validate = values => {
@@ -30,7 +30,29 @@ const validate = values => {
 
     return(errors)
 }
+
 function Signup() {
+    const [eu, seteu] = useState({email:false,username:false})
+    async function checkandsignup(values){
+        let e=await checkemail(values.email)
+        let u=await checkuser(values.username)
+        if(e & u ){
+            seteu({email:'Email already exist',username:'Username already exist'})
+            return(null)
+        }
+        else if(e){
+            seteu({email:'Email already exist',username:false})
+        }  
+        else if(u){
+            seteu({email:false,username:'Username already exist'})
+            
+        }
+        else{
+            seteu({email:false,username:false})
+            await signuppost(values)
+        }
+        
+    }
     const formik = useFormik({
         initialValues: {
             username: '',
@@ -42,7 +64,8 @@ function Signup() {
         },
         validate,
         onSubmit: values => {
-            signuppost(values)
+            // signuppost(values)
+            checkandsignup(values)
         }
     })
     return (
@@ -60,6 +83,7 @@ function Signup() {
                                         <Form.Label className='align-left'>UserName</Form.Label>
                                         <Form.Control type="text" id='username' name='username' onChange={formik.handleChange} value={formik.values.username} />
                                         {formik.errors.username?<small className="red"><span>{formik.errors.username}</span></small>:null}
+                                        {eu.username?<small className="red"><span>{eu.username}</span></small>:null}
                                     </Form.Group>
                                     <Form.Group>
                                         <Form.Label>Name</Form.Label>
@@ -70,6 +94,8 @@ function Signup() {
                                         <Form.Label>Email</Form.Label>
                                         <Form.Control type="email" aria-describedby="emailHelp" id='email' name='email' onChange={formik.handleChange} value={formik.values.email} />
                                         {formik.errors.email?<small className="red"><span>{formik.errors.email}</span></small>:null}
+                                        {eu.email?<small className="red"><span>{eu.email}</span></small>:null}
+                                        
                                     </Form.Group>
                                     <Form.Group>
                                         <Form.Label>Password</Form.Label>

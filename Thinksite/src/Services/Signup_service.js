@@ -5,3 +5,15 @@ export async function signuppost(data){
     .then((res)=>{console.log(res)})
 }
 
+export async function checkemail(data) {
+    // return await API.post('user/checke',{email:data})
+    // .then((res)=>{res.data.email})
+    return await API.post('user/checke',{email:data}).then(res=>res.data.email)
+    
+}
+export async function checkuser(data) {
+    // return await API.post('user/checke',{email:data})
+    // .then((res)=>{res.data.email})
+    return await API.post('user/checku',{username:data}).then(res=>res.data.username)
+    
+}

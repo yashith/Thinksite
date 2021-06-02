@@ -26,16 +26,50 @@ userRoute.route('/')
       })
       .catch((err) => next(err));
   })
-userRoute.post('/checkue', (req, res) => {
-  Users.findOne({username:req.body.username,email:req.body.email},(err,result)=>{
-    if(err){
-      res.send(err)
-    }
-    else{
-      console.log(result)
-      res.send(result)
-    }
-  })
+userRoute.post('/checku', (req, res) => {
+  Users.findOne({username:req.body.username},(err,result)=>{
+  if (err) {
+    res.send(err)
+  }
+  else if(result) {
+    res.setHeader('Content-Type','application/json');
+    res.json({username:true})
+  }
+  else{
+    res.setHeader('Content-Type','application/json');
+    res.json({username:false})
+  }
+})
+})
+userRoute.post('/checke', (req, res) => {
+  Users.findOne({email:req.body.email},(err,result)=>{
+  if (err) {
+    res.send(err)
+  }
+  else if(result) {
+    res.setHeader('Content-Type','application/json');
+    res.json({email:true})
+  }
+  else{
+    res.setHeader('Content-Type','application/json');
+    res.json({email:false})
+  }
+})
+})
+userRoute.post('/checku', (req, res) => {
+  Users.findOne({username:req.body.username},(err,result)=>{
+  if (err) {
+    res.send(err)
+  }
+  else if(result) {
+    res.setHeader('Content-Type','application/json');
+    res.json({username:true})
+  }
+  else{
+    res.setHeader('Content-Type','application/json');
+    res.json({username:false})
+  }
+})
 })
 
 // userRoute.route('/signup')
