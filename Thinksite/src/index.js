@@ -1,15 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter as Router,Route,Switch} from 'react-router-dom'
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ParallaxProvider } from 'react-scroll-parallax';
 import Signup from './Components/signup'
+import Login from './Components/login'
 ReactDOM.render(
   <React.StrictMode>
     <ParallaxProvider>
-      {/* <App /> */}
-      <Signup/>
+      
+      {/* <Signup/> */}
+      {/* <Login/> */}
+      <Router>
+        <Switch>
+          <Route  path='/' exact component={App}/>
+          <Route  path='/signup'  component={Signup}/>
+        </Switch>
+        
+      </Router>
     </ParallaxProvider>
 
   </React.StrictMode>,

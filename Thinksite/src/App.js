@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react';
-
+import { Link, Route, BrowserRouter as Router, Switch, useHistory } from 'react-router-dom'
 import './App.css';
-import { Container, Row, Col, Card, CardDeck,Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, CardDeck, Button } from 'react-bootstrap';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Twlogo from './Twlogo.png';
 import PP from './PP.jpg'
@@ -27,11 +27,13 @@ function App() {
   }, [])
 
   window.addEventListener('scroll', testparralex)
+  const history=useHistory();
+  const signuphandle=()=>{history.push('/signup')}
   return (
     <div className="App" >
       <div style={
         {
-          position:'absolute',
+          position: 'absolute',
           transform: `translateY(${y * 0.5}px)`
         }
       }>
@@ -76,7 +78,7 @@ function App() {
             </Row>
             <Row className='sec1-1'>
               <Col md-12 className="pt-5">
-                <Button variant='warning'><span className='rel w700' style={{fontSize:'3vh',padding:'10px'}}>Register</span></Button>
+                <Button variant='warning' ><span className='rel w700' style={{ fontSize: '3vh', padding: '10px' }} onClick={signuphandle}>Register</span></Button>
               </Col>
             </Row>
           </Col>
@@ -85,7 +87,7 @@ function App() {
           <Col>
             <Row className='mb-5'>
               <Col>
-                <h1><span style={{fontSize:'6vh'}}>Guest Speakers</span></h1>
+                <h1><span style={{ fontSize: '6vh' }}>Guest Speakers</span></h1>
               </Col>
             </Row>
             <Speakers />
@@ -95,7 +97,7 @@ function App() {
           <Col>
             <Row>
               <Col className='mb-5'>
-                <h1><span style={{fontSize:'6vh'}}>Timeline</span></h1>
+                <h1><span style={{ fontSize: '6vh' }}>Timeline</span></h1>
               </Col>
             </Row>
             <Timeline />
@@ -112,7 +114,7 @@ function App() {
           </Col>
         </Row>
       </Container>
-      
+
     </div>
   );
 }

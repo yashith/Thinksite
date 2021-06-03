@@ -56,39 +56,7 @@ userRoute.post('/checke', (req, res) => {
   }
 })
 })
-userRoute.post('/checku', (req, res) => {
-  Users.findOne({username:req.body.username},(err,result)=>{
-  if (err) {
-    res.send(err)
-  }
-  else if(result) {
-    res.setHeader('Content-Type','application/json');
-    res.json({username:true})
-  }
-  else{
-    res.setHeader('Content-Type','application/json');
-    res.json({username:false})
-  }
-})
-})
 
-// userRoute.route('/signup')
-//     .post((req, res, next) => {
-//         Users.create(req.body)
-//             .then((user) => {
-//                 res.statusCode = 200;
-//                 res.setHeader('Content-Type', 'application/json');
-//                 res.json(user);
-//             })
-//             .catch((err) => {
-//                 if (err.name === 'MongoError' && err.code === 11000) {
-//                     console.log('user exist')
-//                 }
-//                 else{
-//                     console.log(err.code)
-//                 }
-//             })
-//     })
 userRoute.post('/signup', (req, res, next) => {
   Users.register(new Users(
     {
