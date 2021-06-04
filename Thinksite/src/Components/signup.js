@@ -3,6 +3,7 @@ import { Container, Col, Row, Card, Form, Button } from 'react-bootstrap'
 import './signupstyle.css'
 import {signuppost,checkemail,checkuser} from '../Services/Signup_service'
 import { useFormik } from 'formik'
+import { useHistory } from 'react-router-dom';
 
 const validate = values => {
     const errors = {};
@@ -33,6 +34,7 @@ const validate = values => {
 
 function Signup() {
     const [eu, seteu] = useState({email:false,username:false})
+    const history=useHistory();
     async function checkandsignup(values){
         let e=await checkemail(values.email)
         let u=await checkuser(values.username)
@@ -49,7 +51,11 @@ function Signup() {
         }
         else{
             seteu({email:false,username:false})
-            await signuppost(values)
+            let success=await signuppost(values)
+            console.log(success)
+            if(success){    
+                history.push('/login')
+            }
         }
         
     }

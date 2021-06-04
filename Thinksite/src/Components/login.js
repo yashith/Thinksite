@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Container, Col, Row, Card, Form, Button } from 'react-bootstrap'
 import './loginstyle.css'
-import { signuppost, checkemail, checkuser } from '../Services/Signup_service'
+import { login } from '../Services/Login_service'
+import { checkuser } from '../Services/Login_service'
 import { useFormik } from 'formik'
 
 const validate = values => {
@@ -17,26 +18,16 @@ const validate = values => {
 }
 
 function Login() {
-    const [eu, seteu] = useState({ email: false, username: false })
-    async function checkandsignup(values) {
-        let e = await checkemail(values.email)
-        let u = await checkuser(values.username)
-        if (e & u) {
-            seteu({ email: 'Email already exist', username: 'Username already exist' })
-            return (null)
+    const [uperror, setuperror] = useState(true)
+    async function loginuser(values) {
+        let res =await login(values)
+        console.log(res)
+        if(!res.success){
+            setuperror(false)
         }
-        else if (e) {
-            seteu({ email: 'Email already exist', username: false })
+        else if(res.success){
+            setuperror(true)
         }
-        else if (u) {
-            seteu({ email: false, username: 'Username already exist' })
-
-        }
-        else {
-            seteu({ email: false, username: false })
-            await signuppost(values)
-        }
-
     }
     const formik = useFormik({
         initialValues: {
@@ -46,7 +37,7 @@ function Login() {
         validate,
         onSubmit: values => {
             // signuppost(values)
-            checkandsignup(values)
+            loginuser(values)
         }
     })
     return (
@@ -64,18 +55,20 @@ function Login() {
                                         <Form.Label className='align-left'>UserName</Form.Label>
                                         <Form.Control type="text" id='username' name='username' onChange={formik.handleChange} value={formik.values.username} />
                                         {formik.errors.username ? <small className="red"><span>{formik.errors.username}</span></small> : null}
-                                        {eu.username ? <small className="red"><span>{eu.username}</span></small> : null}
+                                       
                                     </Form.Group>
                                     <Form.Group>
                                         <Form.Label>Password</Form.Label>
                                         <Form.Control type="password" id='password' name='password' onChange={formik.handleChange} value={formik.values.password} />
                                         {formik.errors.password ? <small className="red"><span>{formik.errors.password}</span></small> : null}
+                                        {uperror ? null : <small className="red"><span>Username or Password is wrong</span></small>}
                                     </Form.Group>
                                     <Form.Group>
                                         <Form.Check type="checkbox" label="Remember me" />
                                     </Form.Group>
+                                    
                                     <div className="btnsub">
-                                        <Button type='submit' variant='success'>Signup</Button>
+                                        <Button type='submit' variant='success'>Login</Button>
                                     </div>
                                 </Form>
                             </Card.Body>
