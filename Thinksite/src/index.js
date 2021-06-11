@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { ParallaxProvider } from 'react-scroll-parallax';
 import Signup from './Components/signup'
 import Login from './Components/login'
+import Dashboard from './Components/Dashboard/dashboard'
 ReactDOM.render(
   <React.StrictMode>
     <ParallaxProvider>
@@ -18,6 +19,7 @@ ReactDOM.render(
           <Route  path='/' exact component={App}/>
           <Route  path='/signup'  component={Signup}/>
           <Route  path='/login'  component={Login}/>
+          <Route  path='/user' component={Dashboard}/>
         </Switch>
         
       </Router>

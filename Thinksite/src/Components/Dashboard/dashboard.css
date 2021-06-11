@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;700;800&display=swap');
+.rel{
+  font-family: 'Raleway', sans-serif; 
+}
+.w100{
+  font-weight: 100;
+}
+.w200{
+  font-weight: 200;
+}
+.w300{
+  font-weight: 300;
+}
+.w400{
+  font-weight: 400;
+}
+.w700{
+  font-weight: 700;
+}
+.w800{
+  font-weight: 800;
+}
+.maindiv{
+    height: 100vh;
+    width: 100%;
+}
+.navtop{
+    background-color: rgb(48, 48, 48);
+    width: 100%;
+    height:5%;
+    
+}
+.contentbar{  
+    width: 100%;
+    height: 95%;
+    display: flex;
+}
+.sidebar{
+    background-color: rgb(31, 31, 31);
+    border-right:solid rgb(58, 58, 58);
+    border-width:0 1px;
+    width:15%;
+    height: 100%;
+    color: white;
+    padding-top: 50px;
+}
+.tabs{
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(31, 31, 31);
+    width:calc( 110%+1px);
+    z-index: 1;
+}
+.content{
+  width:85%;
+  height:100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.members{
+  width:60%;
+  height:60%;
+  /* border:dashed gray; */
+  /* border-radius: 5%; */
+  /* border-width: 1px; */
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='30' ry='30' stroke='%23333' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='43' stroke-linecap='square'/%3e%3c/svg%3e");
+  border-radius: 30px;
+  display:flex;
+  align-content: center;
+  justify-content: center;
+}
+.lab1{
+  color: rgb(131, 131, 131);
+}
+.membinner{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}

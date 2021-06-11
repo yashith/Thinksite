@@ -37,6 +37,13 @@
 .alcenter{
   align-items: center;
 }
+.loginbutton{
+  background-color: #0F75BC !important;
+}
+.loginbutton-text{
+  font-size: 2vh;
+}
+
 .jscenter{
   justify-content: center;
 }

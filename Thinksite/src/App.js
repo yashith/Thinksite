@@ -29,6 +29,7 @@ function App() {
   window.addEventListener('scroll', testparralex)
   const history=useHistory();
   const signuphandle=()=>{history.push('/signup')}
+  const loginhandle=()=>{history.push('/login')}
   return (
     <div className="App" >
       <div style={
@@ -54,6 +55,9 @@ function App() {
       <Container fluid className='con' >
         <Row className='sec1'>
           <Col md-12 className='vercenter'>
+            <Row className='d-flex align-content-center' >
+              <Col className='d-flex justify-content-end'><Button className='rounded-pill loginbutton'  onClick={loginhandle}><span className='rel w600 loginbutton-text '>Login</span></Button></Col>  
+            </Row>
             <Row className='alcenter'>
               <Col className='sldiv' md-5>
                 <h1 className='sl1 rel w100'>SRI LANKA'S</h1>
@@ -78,7 +82,7 @@ function App() {
             </Row>
             <Row className='sec1-1'>
               <Col md-12 className="pt-5">
-                <Button variant='warning' ><span className='rel w700' style={{ fontSize: '3vh', padding: '10px' }} onClick={signuphandle}>Register</span></Button>
+                <Button variant='warning' className='rounded-pill' ><span className='rel w700 ' style={{ fontSize: '3vh', padding: '10px' }} onClick={signuphandle}>Register</span></Button>
               </Col>
             </Row>
           </Col>
