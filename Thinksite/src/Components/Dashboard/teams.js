@@ -1,7 +1,7 @@
 import { React, useState } from 'react';
 import { Button, Form, Modal, Tabs, Tab } from 'react-bootstrap'
 import { Formik, useFormik } from 'formik';
-import { Submitteam } from '../../Services/create_team_service';
+import { Submitteam } from '../../Services/team_service';
 import './dashboard.css'
 
 export default function Teams() {
@@ -12,6 +12,7 @@ export default function Teams() {
         let success=await Submitteam(values);
         if(success){
             console.log('success')
+            setis_modal_open(false)
         }
         else{
             console.log('failed')
@@ -57,9 +58,10 @@ export default function Teams() {
                                     <Form.Group>
                                         <Form.Label>Team Name</Form.Label>
                                         <Form.Control type='text' id='name' name='name' onChange={formik.handleChange} value={formik.values.name} />
+                                        {formik.errors.name ? <small className="red"><span>{formik.errors.name}</span></small> : null}
                                     </Form.Group>
                                     <div className="btnsub">
-                                        <Button type='submit' variant='success'>Login</Button>
+                                        <Button type='submit' variant='success'>Create</Button>
                                     </div>
                                 </Form>
                             </Modal.Body>

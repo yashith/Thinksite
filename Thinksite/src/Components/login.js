@@ -4,6 +4,7 @@ import './loginstyle.css'
 import { login } from '../Services/Login_service'
 import { checkuser } from '../Services/Login_service'
 import { useFormik } from 'formik'
+import { useHistory } from 'react-router-dom';
 
 const validate = values => {
     const errors = {};
@@ -19,15 +20,20 @@ const validate = values => {
 
 function Login() {
     const [uperror, setuperror] = useState(true)
+    let history = useHistory();
     async function loginuser(values) {
         let res =await login(values)
       
         if(!res.success){
             setuperror(false)
+            
         }
         else if(res.success){
             setuperror(true)
+            localStorage.setItem('token',res.token)
+            history.push('/user')
         }
+       console.log(localStorage.getItem('token'))
     }
     const formik = useFormik({
         initialValues: {
