@@ -21,7 +21,7 @@ function Login() {
     const [uperror, setuperror] = useState(true)
     async function loginuser(values) {
         let res =await login(values)
-        console.log(res)
+      
         if(!res.success){
             setuperror(false)
         }
