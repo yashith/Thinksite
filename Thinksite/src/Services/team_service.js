@@ -12,3 +12,10 @@ export async function Submitteam(data) {
     return await API.post('team/create',data,{headers:conf}).then(res=>res.data.success)
     
 }
+export async function getTeamdetails(){
+    const conf={
+        "Content-type": "application/json",
+         "Authorization": `Bearer ${localStorage.getItem("token")}`
+       }
+       return await API.get('team/',{headers:conf}).then(res=>res.data) 
+}
