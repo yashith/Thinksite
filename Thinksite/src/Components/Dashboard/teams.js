@@ -1,13 +1,13 @@
 import { React, useState, useEffect } from 'react';
 import { Button, Form, Modal, Tabs, Tab, Table } from 'react-bootstrap'
 import { Formik, useFormik } from 'formik';
-import { Submitteam, getTeamdetails } from '../../Services/team_service';
+import { Submitteam, getTeamdetails, getPendingRequest } from '../../Services/team_service';
 import './dashboard.css'
 
 export default function Teams() {
     const [is_modal_open, setis_modal_open] = useState(false)
     const [team_details, setteam_details] = useState(0)
-    const test = 1;
+    const [pending, setpending] = useState([])
     const open = () => { setis_modal_open(!is_modal_open) }
     /*Submit function*/
     async function createteam(values) {
@@ -25,8 +25,8 @@ export default function Teams() {
     async function getTeams() {
         const details = await getTeamdetails();
         await setteam_details(details[0])
-        
-        
+        const pend = await getPendingRequest();
+        await setpending(pend)
     }
     /*render teamfunction*/
     function Renderwithoutdetails() {
@@ -40,18 +40,26 @@ export default function Teams() {
                     </tr>
                 </thead>
                 <tbody>
-                    {team_details.members.map(member=>{
-                        return(
+                    {team_details.members.map(member => {
+                        return (
                             <tr key={member._id}>
                                 <td>{member._id}</td>
-                                <td>{member.name}</td>-
+                                <td>{member.name}</td>
+                                <td><span style={{ color: 'green' }}>member</span></td>
                             </tr>
                         )
                     })}
-                    <tr>
-                        
-                        
-                    </tr>
+                    {pending.map(req => {
+                            if (req.status === 0) {
+                                return (
+                                    <tr>
+                                        <td>{req.to._id}</td>
+                                        <td>{req.to.name}</td>
+                                        <td><span style={{ color: 'yellow' }}>pending</span></td>
+                                    </tr>
+                                )
+                            }
+                        })}
                 </tbody>
             </Table>
         )
@@ -63,7 +71,7 @@ export default function Teams() {
                 <div className='membinner'>
                     <label className='rel lab1'>You have no teams / <Button variant="outline-success" size='sm' onClick={open}> Create</Button></label>
                 </div>
-                
+
             </div>
         )
 
@@ -71,11 +79,11 @@ export default function Teams() {
     /*useEffect*/
     useEffect(() => {
         getTeams();
-       
+
     }, [])
     useEffect(() => {
-        console.log(team_details)
-    }, [team_details])
+        console.log(pending)
+    }, [team_details, pending])
 
     /*Fomik*/
     const validate = values => {
@@ -100,27 +108,27 @@ export default function Teams() {
         <div className='tabswrapper'>
             <Tabs defaultActiveKey="Teams" transition={false} id="noanim-tab-example">
                 <Tab eventKey="Teams" title="Teams">
-                    {team_details?<Renderwithoutdetails/>:<Renderwithdetails/>}
+                    {team_details ? <Renderwithoutdetails /> : <Renderwithdetails />}
                     <Modal
-                    show={is_modal_open}
-                    onHide={() => setis_modal_open(false)}
-                    className='ctmodal rel'>
-                    <Modal.Header closeButton className='bg-dark'>
-                        <Modal.Title>Create a team</Modal.Title>
-                    </Modal.Header >
-                    <Modal.Body className='bg-dark'>
-                        <Form onSubmit={formik.handleSubmit}>
-                            <Form.Group>
-                                <Form.Label>Team Name</Form.Label>
-                                <Form.Control type='text' id='name' name='name' onChange={formik.handleChange} value={formik.values.name} />
-                                {formik.errors.name ? <small className="red"><span>{formik.errors.name}</span></small> : null}
-                            </Form.Group>
-                            <div className="btnsub">
-                                <Button type='submit' variant='success'>Create</Button>
-                            </div>
-                        </Form>
-                    </Modal.Body>
-                </Modal>
+                        show={is_modal_open}
+                        onHide={() => setis_modal_open(false)}
+                        className='ctmodal rel'>
+                        <Modal.Header closeButton className='bg-dark'>
+                            <Modal.Title>Create a team</Modal.Title>
+                        </Modal.Header >
+                        <Modal.Body className='bg-dark'>
+                            <Form onSubmit={formik.handleSubmit}>
+                                <Form.Group>
+                                    <Form.Label>Team Name</Form.Label>
+                                    <Form.Control type='text' id='name' name='name' onChange={formik.handleChange} value={formik.values.name} />
+                                    {formik.errors.name ? <small className="red"><span>{formik.errors.name}</span></small> : null}
+                                </Form.Group>
+                                <div className="btnsub">
+                                    <Button type='submit' variant='success'>Create</Button>
+                                </div>
+                            </Form>
+                        </Modal.Body>
+                    </Modal>
                 </Tab>
                 <Tab eventKey="Requests" title="Requests">
                     <div className='members'>

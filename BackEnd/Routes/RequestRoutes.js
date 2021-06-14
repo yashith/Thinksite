@@ -30,19 +30,23 @@ requestRoute.route('/')
     
 requestRoute.route('/sent')
     .get(authenticate.verifyUser, (req, res) => {
-        Requests.find({ from: req.user._id }, (err, result) => {
-            if (err) {
-                res.statusCode = 500;
-                res.setHeader('Content-Type', 'application/json');
-                res.json({ err: err });
+        Requests.find({ from: req.user._id })
+        .populate('to')
+        .exec(
+             (err, result) => {
+                if (err) {
+                    res.statusCode = 500;
+                    res.setHeader('Content-Type', 'application/json');
+                    res.json({ err: err });
+                }
+                else {
+                    res.statusCode = 200;
+                    res.setHeader('Content-Type', 'application/json');
+                    res.json(result);
+    
+                }
             }
-            else {
-                res.statusCode = 200;
-                res.setHeader('Content-Type', 'application/json');
-                res.json(result);
-
-            }
-        })
+        )
     })
 requestRoute.route('/received')
     .get(authenticate.verifyUser, (req, res) => {

@@ -20,9 +20,9 @@ const Requestschema =mongoose.Schema({
     status:{
         type:Number,
         min:0,
-        max:1,
+        max:2,
 
-        // pending-0 ,accepted - 1
+        // pending-0 ,accepted - 1 , rejected-2
     }
 })
 
