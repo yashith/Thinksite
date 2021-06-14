@@ -7,6 +7,7 @@ let authenticate=require('./authenticate')
 require('dotenv/config')
 const users=require('./Routes/UserRoute')
 const team=require('./Routes/TeamRoutes')
+const requests=require('./Routes/RequestRoutes')
 const app= express()
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
@@ -32,5 +33,6 @@ app.get('/',(req,res)=>{
 app.use('/user',users);
 // app.use(auth)
 app.use('/team',team)
+app.use('/requests',requests)
 
 app.listen(3001)

@@ -42,7 +42,7 @@ export default function Teams() {
                 <tbody>
                     {team_details.members.map(member=>{
                         return(
-                            <tr>
+                            <tr key={member._id}>
                                 <td>{member._id}</td>
                                 <td>{member.name}</td>-
                             </tr>
