@@ -1,13 +1,14 @@
 import { React, useState, useEffect } from 'react';
-import { Button, Form, Modal, Tabs, Tab, Table } from 'react-bootstrap'
+import { Button, Form, Modal, Tabs, Tab, Table, ButtonGroup } from 'react-bootstrap'
 import { Formik, useFormik } from 'formik';
-import { Submitteam, getTeamdetails, getPendingRequest } from '../../Services/team_service';
+import { Submitteam, getTeamdetails, getPendingRequest, getReceivedRequest } from '../../Services/team_service';
 import './dashboard.css'
 
 export default function Teams() {
     const [is_modal_open, setis_modal_open] = useState(false)
     const [team_details, setteam_details] = useState(0)
     const [pending, setpending] = useState([])
+    const [received, setreceived] = useState(0)
     const open = () => { setis_modal_open(!is_modal_open) }
     /*Submit function*/
     async function createteam(values) {
@@ -27,9 +28,11 @@ export default function Teams() {
         await setteam_details(details[0])
         const pend = await getPendingRequest();
         await setpending(pend)
+        const received = await getReceivedRequest();
+        await setreceived(received)
     }
     /*render teamfunction*/
-    function Renderwithoutdetails() {
+    function Renderwithdetails() {
         return (
             <Table variant='dark' className="membertable">
                 <thead>
@@ -45,27 +48,28 @@ export default function Teams() {
                             <tr key={member._id}>
                                 <td>{member._id}</td>
                                 <td>{member.name}</td>
-                                <td><span style={{ color: 'green' }}>member</span></td>
+                                <td><span style={{ color: '#5cb85c' }}>member</span></td>
                             </tr>
                         )
                     })}
                     {pending.map(req => {
-                            if (req.status === 0) {
-                                return (
-                                    <tr>
-                                        <td>{req.to._id}</td>
-                                        <td>{req.to.name}</td>
-                                        <td><span style={{ color: 'yellow' }}>pending</span></td>
-                                    </tr>
-                                )
-                            }
-                        })}
+                        if (req.status === 0) {
+                            return (
+                                <tr>
+                                    <td>{req.to._id}</td>
+                                    <td>{req.to.name}</td>
+                                    <td><span style={{ color: '#f0ad4e' }}>pending</span></td>
+                                </tr>
+                            )
+                        }
+                    })}
                 </tbody>
             </Table>
         )
 
     }
-    function Renderwithdetails() {
+
+    function Renderwithoutdetails() {
         return (
             <div className='members'>
                 <div className='membinner'>
@@ -76,14 +80,48 @@ export default function Teams() {
         )
 
     }
+    /*Render Requests function */
+    function RenderWithRequests() {
+        return (
+            <Table variant='dark' className="membertable">
+                <tbody>
+                    {received.map(req => {
+                        if (req.status === 0) {
+                            return (
+                                <tr key={req.from._id}>
+                                    <td>{req.from._id}</td>
+                                    <td>{req.from.name}</td>
+                                    <td>
+                                        <ButtonGroup>
+                                            <Button className='btn-sm' variant='secondary'>Decline</Button>
+                                            <Button className='btn-sm' variant='primary'>Accept</Button>
+                                        </ButtonGroup>
+                                    </td>
+                                </tr>
+                            )
+                        }
+                    })}
+                </tbody>
+            </Table>
+        )
+    }
+    function RenderWithoutRequests() {
+        return (
+            <div className='members'>
+                <div className='membinner'>
+                    <label className='rel lab1'>You have no requests</label>
+                </div>
+            </div>
+        )
+    }
     /*useEffect*/
     useEffect(() => {
         getTeams();
 
     }, [])
     useEffect(() => {
-        console.log(pending)
-    }, [team_details, pending])
+        console.log(received)
+    }, [team_details, pending, received])
 
     /*Fomik*/
     const validate = values => {
@@ -108,7 +146,7 @@ export default function Teams() {
         <div className='tabswrapper'>
             <Tabs defaultActiveKey="Teams" transition={false} id="noanim-tab-example">
                 <Tab eventKey="Teams" title="Teams">
-                    {team_details ? <Renderwithoutdetails /> : <Renderwithdetails />}
+                    {team_details ? <Renderwithdetails /> : <Renderwithoutdetails />}
                     <Modal
                         show={is_modal_open}
                         onHide={() => setis_modal_open(false)}
@@ -131,11 +169,7 @@ export default function Teams() {
                     </Modal>
                 </Tab>
                 <Tab eventKey="Requests" title="Requests">
-                    <div className='members'>
-                        <div className='membinner'>
-                            <label className='rel lab1'>You have no requests</label>
-                        </div>
-                    </div>
+                {received ? <RenderWithRequests /> : <RenderWithoutRequests />}
                 </Tab>
             </Tabs>
         </div>

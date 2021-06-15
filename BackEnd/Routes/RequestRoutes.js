@@ -50,7 +50,9 @@ requestRoute.route('/sent')
     })
 requestRoute.route('/received')
     .get(authenticate.verifyUser, (req, res) => {
-        Requests.find({ to: req.user._id }, (err, result) => {
+        Requests.find({ to: req.user._id })
+        .populate('from')
+         .exec((err, result) => {
             if (err) {
                 res.statusCode = 500;
                 res.setHeader('Content-Type', 'application/json');

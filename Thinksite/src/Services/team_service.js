@@ -26,3 +26,10 @@ export async function getPendingRequest(){
        }
        return await API.get('requests/sent/',{headers:conf}).then(res=>res.data) 
 }
+export async function getReceivedRequest(){
+    const conf={
+        "Content-type": "application/json",
+         "Authorization": `Bearer ${localStorage.getItem("token")}`
+       }
+       return await API.get('requests/received/',{headers:conf}).then(res=>res.data) 
+}
