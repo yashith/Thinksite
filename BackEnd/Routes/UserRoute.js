@@ -88,6 +88,24 @@ userRoute.post('/login', passport.authenticate('local'), (req, res) => {
   res.json({ success: true, token: token, status: 'you are succesfully loggedin' })
 })
 
+userRoute.get('/search/:name',(req,res)=>{
+  let reg = new RegExp('^'+req.params.name)
+  Users.find({name:reg},'name institute',(err,result)=>
+  {
+    if(err){
+      res.statusCode=500;
+      res.setHeader('Content-Type', 'application/json');
+      res.json(err);
+    }
+    else if(result){
+      res.statusCode=200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json(result);
+    }
+  }
+  )
+})
+
 
 
 module.exports = userRoute;

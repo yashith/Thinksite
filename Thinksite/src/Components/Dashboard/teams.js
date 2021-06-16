@@ -1,7 +1,8 @@
 import { React, useState, useEffect } from 'react';
-import { Button, Form, Modal, Tabs, Tab, Table, ButtonGroup } from 'react-bootstrap'
+import { Button, Form, Modal, Tabs, Tab, Table, ButtonGroup,Card } from 'react-bootstrap'
 import { Formik, useFormik } from 'formik';
 import { Submitteam, getTeamdetails, getPendingRequest, getReceivedRequest } from '../../Services/team_service';
+import MemberSearch from './memberSearch';
 import './dashboard.css'
 
 export default function Teams() {
@@ -147,6 +148,7 @@ export default function Teams() {
             <Tabs defaultActiveKey="Teams" transition={false} id="noanim-tab-example">
                 <Tab eventKey="Teams" title="Teams">
                     {team_details ? <Renderwithdetails /> : <Renderwithoutdetails />}
+                        <MemberSearch/>
                     <Modal
                         show={is_modal_open}
                         onHide={() => setis_modal_open(false)}
