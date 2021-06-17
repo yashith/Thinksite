@@ -31,7 +31,7 @@ requestRoute.route('/')
 requestRoute.route('/sent')
     .get(authenticate.verifyUser, (req, res) => {
         Requests.find({ from: req.user._id })
-        .populate('to')
+        .populate('to','name _id ')
         .exec(
              (err, result) => {
                 if (err) {
@@ -51,7 +51,7 @@ requestRoute.route('/sent')
 requestRoute.route('/received')
     .get(authenticate.verifyUser, (req, res) => {
         Requests.find({ to: req.user._id })
-        .populate('from')
+        .populate('from','name _id ')
          .exec((err, result) => {
             if (err) {
                 res.statusCode = 500;

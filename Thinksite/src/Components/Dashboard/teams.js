@@ -148,7 +148,7 @@ export default function Teams() {
             <Tabs defaultActiveKey="Teams" transition={false} id="noanim-tab-example">
                 <Tab eventKey="Teams" title="Teams">
                     {team_details ? <Renderwithdetails /> : <Renderwithoutdetails />}
-                        <MemberSearch/>
+                        <MemberSearch teamid={team_details._id} reload={getTeams}/>
                     <Modal
                         show={is_modal_open}
                         onHide={() => setis_modal_open(false)}

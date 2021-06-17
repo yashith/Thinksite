@@ -8,7 +8,7 @@ const { populate } = require('../Models/Users');
 teamRoute.route('/')
     .get(authenticate.verifyUser, (req, res) => {
         Teams.find({ leader: req.user._id })
-        .populate('members')
+        .populate('members','name _id')
         .exec((err, result) => {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');

@@ -1,36 +1,48 @@
-import React, { useState,useEffect } from 'react';
-import { Card, Form } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Card, Form, ListGroup, Button } from 'react-bootstrap';
 import API from '../../Services/Base';
+import './dashboard.css'
 
-export default function MemberSearch() {
+export default function MemberSearch(props) {
     const [searchval, setsearchval] = useState([])
-    async function handleChange(event){
-        let sr =event.target.value
-        const conf = {
-            "Content-type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("token")}`
-        }
-        await API.get('user/search/'+sr, { headers: conf })
-        .then(res =>  setsearchval(res.data))
-        
-       
+    const conf = {
+        "Content-type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("token")}`
     }
-    function Renderlist(){
-        if(searchval){
-            return(
-                <ul>
-                    {searchval.map(member=>{
-                        return(<li key={member.id}>{member.name}-{member.institute}</li>)
+    async function handleChange(event) {
+        let sr = event.target.value
+        await API.get('user/search/' + sr, { headers: conf })
+            .then(res => setsearchval(res.data))
+    }
+    async function sendReq(id){
+        await API.post('requests/',{to:id,team:props.teamid},{ headers: conf })
+        .then(res=>console.log(res))
+        props.reload();
+ 
+    }
+    function Renderlist() {
+        if (searchval) {
+            return (
+                <ListGroup>
+                    {searchval.map(member => {
+                        return (
+                            <ListGroup.Item key={member._id} className='listgroup-flex'>
+                                <div className="listgroip-details">
+                                    <div className="detail-div"> {member.name}</div>
+                                    <div>{member.institute}</div>
+                                </div>
+                                <div><Button variant='success' onClick={()=>{sendReq(member._id)}}>Send request</Button></div>
+                            </ListGroup.Item>)
                     })}
-                </ul>
+                </ListGroup>
             )
         }
-        else{
-            return(null)
+        else {
+            return (null)
         }
     }
     useEffect(() => {
-        console.log(searchval)
+        
     }, [searchval])
     return (
         <Card>
@@ -40,7 +52,7 @@ export default function MemberSearch() {
                 </Form>
             </Card.Header>
             <Card.Body>
-                <Renderlist/>
+                <Renderlist />
             </Card.Body>
         </Card>
     )
